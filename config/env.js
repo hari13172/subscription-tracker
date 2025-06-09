@@ -3,4 +3,4 @@ import { config } from "dotenv";
 config({path: `.env.${process.env.NODE_ENV || "development"}.local`});
 
 
-export const { PORT, NODE_ENV, DB_URI , jwt_secret, jwt_expires_in } = process.env;
+export const { PORT, NODE_ENV, DB_URI , jwt_secret, jwt_expires_in,  ARCJET_ENV, ARCJET_KEY } = process.env;
