@@ -15,7 +15,6 @@ const aj = arcjet({
       // Block all bots except the following
       allow: [
         "CATEGORY:SEARCH_ENGINE", 
-   
       ],
     }),
 
