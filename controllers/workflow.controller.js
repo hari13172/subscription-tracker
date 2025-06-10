@@ -6,10 +6,11 @@ const {serve} = require("@upstash/workflow/express")
 
 const Reminder = [7,5,2,1]
 export const sendReminder = serve(async (context) => {
+    
     const {subscriptionId} = context.requestPayload;
     const subscription = await fetchSubscription(context, subscriptionId);
 
-    if (!subscription || subscription.status !== active) return;
+    if (!subscription || subscription.status !== "active") return;
 
 
     const renewalDate = dayjs(subscription.renewalDate);
@@ -31,7 +32,7 @@ export const sendReminder = serve(async (context) => {
 })
 
 const fetchSubscription = async (context, subscriptionId) => {
-    return await context.run('get subscription', () => {
+    return await context.run('get subscription', async () => {
         return Subscription.findById(subscriptionId).populate('user', 'email name');
     })
 }
@@ -44,7 +45,7 @@ const sleepReminder = async (context, label, date) => {
 
 
 const triggerReminder = async(context, label) => {
-    return await context.run(label, () => {
+    return await context.run(label, async () => {
         console.log(`Triggering ${label} reminder`);
     })
 }
